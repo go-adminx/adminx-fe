@@ -1,0 +1,571 @@
+{
+    "type": "object",
+    "properties": {
+        "id": {
+            "title": "ID",
+            "type": "number",
+            "ui:hidden": true
+        },
+        "createdBy": {
+            "title": "CreatedBy",
+            "type": "string",
+            "ui:hidden": true
+        },
+        "updatedBy": {
+            "title": "UpdatedBy",
+            "type": "string",
+            "ui:hidden": true
+        },
+        "title": {
+            "title": "标题",
+            "type": "string",
+            "ui:width": "33%",
+            "ui:options": {
+              "placeholder": "请输入标题"
+            }
+        },
+        "modelName": {
+            "title": "Model",
+            "type": "string",
+            "ui:width": "33%",
+            "ui:options": {
+                "placeholder": "请选择Model"
+            }
+        },
+        "status": {
+            "title": "表单状态",
+            "type": "string",
+            "enum": ["Edit", "Preview", "Disabled", "Hidden"],
+            "ui:width": "33%",
+            "default": "Edit",
+            "ui:options": {
+                "placeholder": "请选择表单状态"
+            }
+        },
+        "viewMode": {
+            "title": "表单视图",
+            "type": "string",
+            "enum": ["Page", "Modal", "Drawer"],
+            "ui:width": "33%",
+            "default": "Page",
+            "ui:options": {
+                "placeholder": "请选择表单视图"
+            }
+        },
+        "viewColumns": {
+            "title": "布局列数",
+            "type": "number",
+            "ui:width": "33%",
+            "default": 2,
+            "ui:options": {
+                "min": 1,
+                "max": 12,
+                "placeholder": "请输入布局列数"
+            }
+        },
+        "fields": {
+            "title": "表单字段",
+            "type": "array",
+            "uniqueItems": "name",
+            "ui:options": {
+                "foldable": true
+            },
+            "items": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "title": "ID",
+                        "type": "number",
+                        "ui:hidden": true
+                    },
+                    "type": {
+                        "title": "字段类型",
+                        "type": "string",
+                        "ui:hidden": true
+                    },
+                    "pid": {
+                        "title": "PID",
+                        "type": "number",
+                        "ui:hidden": true
+                    },
+                    "pfd": {
+                        "title": "PFD",
+                        "type": "string",
+                        "ui:hidden": true
+                    },
+                    "label": {
+                        "title": "表单标签",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "required": {
+                        "title": "必填",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "component": {
+                        "title": "表单组件",
+                        "type": "string",
+                        "enum": [
+                            "Input", "TextArea", "CodeEditor", "TextEditor",
+                            "Password", "UintPicker", "IntPicker", "FloatPicker",
+                            "Switch", "Checkbox", "VSelect", "HSelect",
+                            "DateTimePicker", "DatePicker", "TimePicker", "WeekPicker",
+                            "MonthPicker", "QuarterPicker", "YearPicker", "Slider",
+                            "FileUpload", "Rating", "ArrayTable", "ArrayCards",
+                            "UnassociatedLink", "AssociatedLink", "Section"
+                        ],
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "componentProps": {
+                        "title": "组件属性",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:widget": "codeEditor"
+                    },
+                    "multiple": {
+                        "title": "是否多个",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "enum": {
+                        "title": "枚举项",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:hidden": "{{rootValue.component!='VSelect' && rootValue.component!='HSelect'}}",
+                        "ui:widget": "codeEditor"
+                    },
+                    "span": {
+                        "title": "组件栅格",
+                        "type": "number",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "min": 1,
+                        "max": 24,
+                        "default": 1
+                    },
+                    "width": {
+                        "title": "列宽",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "inList": {
+                        "title": "列表显示",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "ellipsis": {
+                        "title": "自动缩略",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "copyable": {
+                        "title": "支持复制",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "inQuery": {
+                        "title": "查询显示",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "queryIdx": {
+                        "title": "查询排序",
+                        "type": "number",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "default": 0
+                    },
+                    "status": {
+                        "title": "表单状态",
+                        "type": "string",
+                        "enum": ["Edit", "Preview", "Disabled", "Hidden"],
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "default": "Edit"
+                    },
+                    "description": {
+                        "title": "辅助信息",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "placeholder": {
+                        "title": "占位符",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "addonBefore": {
+                        "title": "组件前缀",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "addonAfter": {
+                        "title": "组件后缀",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "style": {
+                        "title": "组件样式",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:widget": "codeEditor"
+                    },
+                    "className": {
+                        "title": "组件样式类名",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "triggerType": {
+                        "title": "触发类型",
+                        "type": "string",
+                        "enum": ["onChange", "onBlur"],
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "format": {
+                        "title": "格式化",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "default": {
+                        "title": "默认值",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {}
+                    },
+                    "maximum": {
+                        "title": "最大/长/多",
+                        "type": "number",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "default": 0
+                    },
+                    "minimum": {
+                        "title": "最小/短/少",
+                        "type": "number",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "default": 0
+                    },
+                    "pattern": {
+                        "title": "匹配规则",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "format": "textarea"
+                    },
+                    "rules": {
+                        "title": "校验规则",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "format": "textarea"
+                    },
+                    "linkages": {
+                        "title": "联动规则",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:widget": "codeEditor"
+                    },
+                    "uniqueItems": {
+                        "title": "重复检查",
+                        "type": "boolean",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:hidden": "{{rootValue.component!='ArrayTable' && rootValue.component!='ArrayCards'}}"
+                    },
+                    "linkModel": {
+                        "title": "关联Model",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                    },
+                    "linkLabelField": {
+                        "title": "关联标签字段",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                    },
+                    "linkValueField": {
+                        "title": "关联值字段",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                    },
+                    "childFields": {
+                        "title": "子表字段",
+                        "type": "array",
+                        "uniqueItems": "name",
+                        "ui:width": "20%",
+                        "ui:options": {
+                            "drawer": true,
+                            "foldable": true
+                        },
+                        "ui:hidden": "{{rootValue.component!='ArrayTable' && rootValue.component!='ArrayCards'}}",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "title": "ID",
+                                    "type": "number",
+                                    "ui:hidden": true
+                                },
+                                "pid": {
+                                    "title": "PID",
+                                    "type": "number",
+                                    "ui:hidden": true
+                                },
+                                "pfd": {
+                                    "title": "PFD",
+                                    "type": "string",
+                                    "ui:hidden": true
+                                },
+                                "label": {
+                                    "title": "表单标签",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "required": {
+                                    "title": "必填",
+                                    "type": "boolean",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "component": {
+                                    "title": "表单组件",
+                                    "type": "string",
+                                    "enum": [
+                                        "Input", "TextArea", "CodeEditor", "TextEditor",
+                                        "Password", "UintPicker", "IntPicker", "FloatPicker",
+                                        "Switch", "Checkbox", "VSelect", "HSelect",
+                                        "DateTimePicker", "DatePicker", "TimePicker", "WeekPicker",
+                                        "MonthPicker", "QuarterPicker", "YearPicker", "Slider",
+                                        "FileUpload", "Rating", "ArrayTable", "ArrayCards",
+                                        "UnassociatedLink", "AssociatedLink", "Section"
+                                    ],
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "componentProps": {
+                                    "title": "组件属性",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:widget": "codeEditor"
+                                },
+                                "multiple": {
+                                    "title": "是否多个",
+                                    "type": "boolean",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "enum": {
+                                    "title": "枚举项",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:hidden": "{{rootValue.component!='VSelect' && rootValue.component!='HSelect'}}",
+                                    "ui:widget": "codeEditor"
+                                },
+                                "span": {
+                                    "title": "组件栅格",
+                                    "type": "number",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "min": 1,
+                                    "max": 24,
+                                    "default": 1
+                                },
+                                "width": {
+                                    "title": "列宽",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "inList": {
+                                    "title": "列表显示",
+                                    "type": "boolean",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "ellipsis": {
+                                    "title": "自动缩略",
+                                    "type": "boolean",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "copyable": {
+                                    "title": "支持复制",
+                                    "type": "boolean",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "inQuery": {
+                                    "title": "查询显示",
+                                    "type": "boolean",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "queryIdx": {
+                                    "title": "查询排序",
+                                    "type": "number",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "default": 0
+                                },
+                                "status": {
+                                    "title": "表单状态",
+                                    "type": "string",
+                                    "enum": ["Edit", "Preview", "Disabled", "Hidden"],
+                                    "enumNames": ["Edit", "Preview", "Disabled", "Hidden"],
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "default": "Edit"
+                                },
+                                "description": {
+                                    "title": "辅助信息",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "placeholder": {
+                                    "title": "占位符",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "addonBefore": {
+                                    "title": "组件前缀",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "addonAfter": {
+                                    "title": "组件后缀",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "style": {
+                                    "title": "组件样式",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:widget": "codeEditor"
+                                },
+                                "className": {
+                                    "title": "组件样式类名",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "triggerType": {
+                                    "title": "触发类型",
+                                    "type": "string",
+                                    "enum": ["onChange", "onBlur"],
+                                    "enumNames": ["onChange", "onBlur"],
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "format": {
+                                    "title": "格式化",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "default": {
+                                    "title": "默认值",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {}
+                                },
+                                "maximum": {
+                                    "title": "最大/长/多",
+                                    "type": "number",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "default": 0
+                                },
+                                "minimum": {
+                                    "title": "最小/短/少",
+                                    "type": "number",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "default": 0
+                                },
+                                "pattern": {
+                                    "title": "匹配规则",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "format": "textarea"
+                                },
+                                "rules": {
+                                    "title": "校验规则",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "format": "textarea"
+                                },
+                                "linkages": {
+                                    "title": "联动规则",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:widget": "codeEditor"
+                                },
+                                "linkModel": {
+                                    "title": "关联Model",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                                },
+                                "linkLabelField": {
+                                    "title": "关联标签字段",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                                },
+                                "linkValueField": {
+                                    "title": "关联值字段",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                                }
+                            },
+                            "required": ["label", "component"]
+                        }
+                    }
+                },
+                "required": ["label", "component"]
+            }
+        }
+    },
+    "required": ["modelName", "status", "fields"]
+}
