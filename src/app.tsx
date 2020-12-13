@@ -2,13 +2,13 @@ import React from 'react';
 import { BasicLayoutProps, PageLoading, Settings as LayoutSettings } from '@ant-design/pro-layout';
 import { notification } from 'antd';
 import { history, RequestConfig } from 'umi';
+import cloneDeep from 'lodash/cloneDeep';
+import { ResponseError } from 'umi-request';
+import { CurrentUser, MenuItem } from '@/interface';
 import RightContent from '@/components/RightContent';
 import Footer from '@/components/Footer';
-import { ResponseError } from 'umi-request';
+import { queryCurrent, queryMenus, queryAcRules } from '@/pages/smc/user/service';
 import defaultSettings from '../config/defaultSettings';
-import { queryCurrent, queryMenus, queryAcRules } from './pages/user/service';
-import { CurrentUser, MenuItem } from '@/interface';
-import cloneDeep from 'lodash/cloneDeep';
 import IconMap from './iconmap';
 
 const loopMenuItem = (menus: MenuItem[]): MenuItem[] =>
@@ -105,9 +105,9 @@ export const layout = ({
     menuDataRender: () => {
       const { currentMenus } = initialState;
       if (currentMenus) {
-        let cloneData = cloneDeep(currentMenus);
+        const cloneData = cloneDeep(currentMenus);
         const menus = cloneData.filter(father => {
-          let branchArr = cloneData.filter(child => father.key == child.parent);
+          const branchArr = cloneData.filter(child => father.key === child.parent);
           branchArr.length > 0 ? father.children = branchArr : [];
           return !father.parent
         });
@@ -182,16 +182,16 @@ export const request: RequestConfig = {
 
       const { res } = ctx;
       const { code, msg } = res;
-      if (code == 0) {
+      if (code === 0) {
         if (method === 'post') {
           notification.success({
             message: msg || '提交成功',
           });
-        } else if (method == 'put') {
+        } else if (method === 'put') {
           notification.success({
             message: msg || '更新成功',
           });
-        } else if (method == 'delete') {
+        } else if (method === 'delete') {
           notification.success({
             message: msg || '删除成功',
           });
