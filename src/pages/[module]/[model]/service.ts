@@ -1,5 +1,5 @@
 import { request } from 'umi';
-import { ListParams } from '@/pages/data.d';
+import { ListParams } from '@/interface';
 
 export async function getMeta(modelname: string) {
   return request(`/api/client/formmeta/${modelname}`);

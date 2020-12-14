@@ -12,7 +12,6 @@ import AdminXForm from '@/components/AdminXForm';
 import renderAdminXFormItem from '@/extensions/protable/form-item';
 import { NumberFormItem } from '@/extensions/protable/form-item/number';
 import { DateFormItem } from '@/extensions/protable/form-item/date';
-import trimEnd from 'lodash/string';
 
 const FormCompWithProTablValueType = {
   "Input": "text",
@@ -55,11 +54,11 @@ interface FormListProps {
  * 删除
  * @param selectedRows
  */
-const handleDelete = async (modelname: string, selectedRows: any[]) => {
+const handleDelete = async (model: string, selectedRows: any[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
-    await deleteForm(modelname, {
+    await deleteForm(model, {
       ids: selectedRows.map((row: any) => row.id)
     });
     hide();
@@ -73,9 +72,11 @@ const handleDelete = async (modelname: string, selectedRows: any[]) => {
 };
 
 const FormList: React.FC<FormListProps> = (props) => {
-  const { modelname } = trimEnd(location.pathname, '/').split('/').reverse()[0];
+  console.log(123);
+  // const { model } = trimEnd(location.pathname, '/').split('/').reverse()[0];
+  const { model } = useParams<{model: string}>();
   const { dispatch, formmeta, loading } = props;
-  const { fields = [], menuLabel } = formmeta;
+  const { fields = [], title } = formmeta;
   const isLoading = loading || !(fields.length);
   const actionRef = useRef<ActionType>();
   const [selectedRowsState, setSelectedRows] = useState<any[]>([]);
@@ -83,17 +84,17 @@ const FormList: React.FC<FormListProps> = (props) => {
   const [sessionUsername] = useState(getSessionUsername());
 
   // const canUpdate: boolean = canDo(module, app, 'update');
-  const canCreate: boolean = canDo(modelname, 'create');
-  const canDelete: boolean = canDo(modelname, 'delete');
+  const canCreate: boolean = canDo(model, 'create');
+  const canDelete: boolean = canDo(model, 'delete');
 
   useEffect(() => {
     dispatch({
       type: 'form/getMeta',
       payload: {
-        modelname
+        model
       }
     })
-  }, [modelname, dispatch]);
+  }, [model, dispatch]);
 
   const deleteConfirm = (rows: any[]) => {
     Modal.confirm({
@@ -101,7 +102,7 @@ const FormList: React.FC<FormListProps> = (props) => {
       okText: '确定',
       cancelText: '取消',
       onOk: async () => {
-        await handleDelete(modelname, rows);
+        await handleDelete(model, rows);
         setSelectedRows([]);
         actionRef.current?.reloadAndRest?.();
       }
@@ -188,7 +189,7 @@ const FormList: React.FC<FormListProps> = (props) => {
           dispatch({
             type: 'form/createForm',
             payload: {
-              modelname, values
+              model, values
             },
             callback: () => {
               handleCurPageFormVisible(false);
@@ -208,7 +209,7 @@ const FormList: React.FC<FormListProps> = (props) => {
       <PageLoading tip="Loading Meta..." /> :
       <PageContainer>
         <ProTable<any>
-          headerTitle={`${menuLabel} 列表`}
+          headerTitle={`${title} 列表`}
           rowKey="id"
           search={{
             labelWidth: 120,
@@ -230,7 +231,7 @@ const FormList: React.FC<FormListProps> = (props) => {
             ,
           ] : []}
           request={(params, sorter, filter) => queryForm(
-            modelname, transProTableReqArgs(params, sorter, filter)
+            model, transProTableReqArgs(params, sorter, filter)
           ).then((response) => {
             return {
               data: response.data.list,

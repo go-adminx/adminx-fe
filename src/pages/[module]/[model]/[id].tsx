@@ -6,7 +6,6 @@ import { PageState } from './model';
 import { getSessionUsername } from '@/utils/utils';
 import AdminXForm from '@/components/AdminXForm';
 import { IAdminXForm } from '@/components/AdminXForm/data';
-import trimEnd from 'lodash/string';
 
 interface FormDetailProps {
   dispatch: Dispatch;
@@ -17,7 +16,7 @@ interface FormDetailProps {
 }
 
 const FormDetail: React.FC<FormDetailProps> = (props) => {
-  const [ modelname, id ] = trimEnd(location.pathname, '/').split('/').reverse();
+  const { model, id } = useParams<{model: string, id: string}>();
   const { dispatch, formmeta, detail, loading, saving } = props;
   const isLoading = loading || !(formmeta && Object.keys(formmeta).length && (id === '0' || (detail && Object.keys(detail).length)));
   const [sessionUsername] = useState(getSessionUsername());
@@ -26,14 +25,14 @@ const FormDetail: React.FC<FormDetailProps> = (props) => {
     dispatch({
       type: 'form/getMeta',
       payload: {
-        modelname,
+        model,
       },
     });
     if (id && id !== '0') {
       dispatch({
         type: 'form/getForm',
         payload: {
-          modelname, id
+          model, id
         },
       });
     };
@@ -42,7 +41,7 @@ const FormDetail: React.FC<FormDetailProps> = (props) => {
         type: 'form/clean',
       });
     }
-  }, [modelname, id, dispatch]);
+  }, [model, id, dispatch]);
 
   return (
     <>
@@ -59,7 +58,7 @@ const FormDetail: React.FC<FormDetailProps> = (props) => {
                 dispatch({
                   type: 'form/updateForm',
                   payload: {
-                    modelname, id, values
+                    model, id, values
                   }
                 });
               } else {
@@ -67,7 +66,7 @@ const FormDetail: React.FC<FormDetailProps> = (props) => {
                 dispatch({
                   type: 'form/createForm',
                   payload: {
-                    modelname, values
+                    model, values
                   }
                 });
               }

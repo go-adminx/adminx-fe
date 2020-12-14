@@ -48,6 +48,9 @@ export interface NoticeIconData {
 }
 
 export interface MenuItem {
+  id: number;
+  idx: number;
+  key?: string;
   children?: MenuItem[];
   hideChildrenInMenu?: boolean;
   hideInMenu?: boolean;
@@ -55,7 +58,8 @@ export interface MenuItem {
   locale?: string;
   name?: string;
   path: string;
-  parent?: string;
+  pid: number;
+  ident: string;
   [key: string]: any;
 }
 

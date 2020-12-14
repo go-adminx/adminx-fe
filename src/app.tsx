@@ -15,6 +15,7 @@ const loopMenuItem = (menus: MenuItem[]): MenuItem[] =>
   menus.map(({ icon, children, ...item }) => ({
     ...item,
     icon: icon && IconMap[icon as string],
+    key: item.ident,
     children: children && loopMenuItem(children),
   }));
 
@@ -107,7 +108,7 @@ export const layout = ({
       if (currentMenus) {
         const cloneData = cloneDeep(currentMenus);
         const menus = cloneData.filter(father => {
-          const branchArr = cloneData.filter(child => father.key === child.parent);
+          const branchArr = cloneData.filter(child => father.id === child.pid);
           branchArr.length > 0 ? father.children = branchArr : [];
           return !father.parent
         });
@@ -163,10 +164,10 @@ const errorHandler = (error: ResponseError) => {
 };
 
 export const request: RequestConfig = {
-  prefix: 'http://localhost:8000',
+  prefix: 'http://localhost:8001',
   errorHandler,
   middlewares: [
-    (async (ctx, next) => {
+    (async (ctx: { req?: any; res?: any; }, next: () => any) => {
       const { req } = ctx;
       const { options } = req;
       const { method } = options;

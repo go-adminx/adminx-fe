@@ -32,7 +32,6 @@ import {
 } from '@/extensions/formily/components';
 import 'antd/dist/antd.css';
 import { IAdminXFormField, IAdminXForm } from './data';
-import camelCase from 'lodash/camelCase';
 
 const setup = () => {
   registerFormFields({
@@ -153,7 +152,7 @@ const trans2Prop = (field: IAdminXFormField) => {
 
   if (field.component === 'HSelect' || field.component === 'VSelect') {
     try {
-      propObj.enum = JSON.parse(field.enum);
+      propObj.enum = field.enum ? JSON.parse(field.enum) : [];
     } catch (error) {
       console.error(`"${field.key}"字段相关的枚举选项书写错误，请检查！`);
     }

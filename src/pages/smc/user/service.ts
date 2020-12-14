@@ -20,7 +20,7 @@ export async function getCaptcha(mobile: string) {
 }
 
 export async function queryCurrent() {
-  return request('/api/client/myinfo');
+  return request('/api/user/myinfo');
 }
 
 export async function queryNotices(): Promise<any> {
