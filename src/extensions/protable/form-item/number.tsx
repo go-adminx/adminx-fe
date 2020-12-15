@@ -1,10 +1,10 @@
 import React from "react";
 import { Input, InputNumber, Select } from "antd";
 import { parseSearchForm } from "@/utils/utils";
-import { IAdminXFormItemProps } from "./data";
+import { FormMetaItemProps } from "./data";
 const { Option } = Select;
 
-export const NumberFormItem: React.FC<IAdminXFormItemProps> = (props) => {
+export const NumberFormItem: React.FC<FormMetaItemProps> = (props) => {
   const { fieldProps, defaultOperator = '[eq]' } = props;
 
   return (

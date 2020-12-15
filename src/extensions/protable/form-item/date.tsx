@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import moment from 'moment';
 import { DatePicker, Input, Select } from "antd";
 import { parseSearchForm } from "@/utils/utils";
-import { IAdminXFormItemProps } from "./data";
+import { FormMetaItemProps } from "./data";
 const { Option } = Select;
 
 declare type IRangeDate = [moment.Moment, moment.Moment] | null;
 
-export const DateFormItem: React.FC<IAdminXFormItemProps> = (props) => {
+export const DateFormItem: React.FC<FormMetaItemProps> = (props) => {
   const { fieldProps = {}, defaultOperator = '[eq]' } = props;
   const [operator, setOperator] = useState(defaultOperator);
 

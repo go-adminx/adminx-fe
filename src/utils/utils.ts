@@ -1,4 +1,4 @@
-import { ListParams } from "@/pages/data";
+import { ListParams } from "@/interface";
 import intersection from 'lodash/intersection';
 import { useModel } from "umi";
 
@@ -73,7 +73,7 @@ export const transProTableReqArgs = (
 
 // 鉴权(admin用户忽略)
 export const canDo = (
-  modelname: string,
+  model: string,
   act: string,
 ) : boolean => {
   const { initialState } = useModel('@@initialState');
@@ -82,14 +82,14 @@ export const canDo = (
     return true;
   }
   const currentUserPerms = currentUser && currentUser.roles ? currentUser.roles.map(role => {
-    return `${role.name},/api/crud/${modelname}/${act}`;
+    return `${role.name},/api/crud/${model}/${act}`;
   }) : [];
-  console.log(
-    currentUser,
-    acRules,
-    currentUserPerms,
-    intersection(acRules, currentUserPerms),
-  )
+  // console.log(
+  //   currentUser,
+  //   acRules,
+  //   currentUserPerms,
+  //   intersection(acRules, currentUserPerms),
+  // )
   return intersection(acRules, currentUserPerms).length > 0;
 };
 

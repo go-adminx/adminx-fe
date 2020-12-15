@@ -7,9 +7,9 @@ import { PageContainer, FooterToolbar, PageLoading } from '@ant-design/pro-layou
 import { deleteForm, queryForm } from './service';
 import { PageState } from './model';
 import { transProTableReqArgs, canDo, getSessionUsername } from '@/utils/utils';
-import { IAdminXForm } from '@/components/AdminXForm/data';
-import AdminXForm from '@/components/AdminXForm';
-import renderAdminXFormItem from '@/extensions/protable/form-item';
+import { FormMeta } from '@/interface';
+import XForm from '@/components/XForm';
+import renderXFormItem from '@/extensions/protable/form-item';
 import { NumberFormItem } from '@/extensions/protable/form-item/number';
 import { DateFormItem } from '@/extensions/protable/form-item/date';
 
@@ -46,7 +46,7 @@ const DisableShowInListFC = [
 
 interface FormListProps {
   dispatch: Dispatch;
-  formmeta: Partial<IAdminXForm>;
+  formmeta: Partial<FormMeta>;
   loading: boolean;
 }
 
@@ -72,8 +72,6 @@ const handleDelete = async (model: string, selectedRows: any[]) => {
 };
 
 const FormList: React.FC<FormListProps> = (props) => {
-  console.log(123);
-  // const { model } = trimEnd(location.pathname, '/').split('/').reverse()[0];
   const { model } = useParams<{model: string}>();
   const { dispatch, formmeta, loading } = props;
   const { fields = [], title } = formmeta;
@@ -115,7 +113,7 @@ const FormList: React.FC<FormListProps> = (props) => {
     }
   };
 
-  const columns: ProColumns<IAdminXForm>[] = [];
+  const columns: ProColumns<FormMeta>[] = [];
   columns.push({
     title: 'ID',
     dataIndex: 'id',
@@ -141,7 +139,7 @@ const FormList: React.FC<FormListProps> = (props) => {
         if (type === 'form') {
           return null;
         }
-        return renderAdminXFormItem({field, ...rest});
+        return renderXFormItem({field, ...rest});
       },
     });
   });
@@ -178,11 +176,11 @@ const FormList: React.FC<FormListProps> = (props) => {
     ),
   });
 
-  const CurAdminXForm = () => {
+  const CurXForm = () => {
     // 表单在modal和drawer形态下强制使用2列或1列的布局
     formmeta.viewColumns = (formmeta.viewColumns || 0) > 1 ? 2 : 1;
     return (
-      <AdminXForm
+      <XForm
         formmeta={formmeta}
         onSubmit={(values: { [key: string]: any }) => {
           values.createdBy = sessionUsername;
@@ -270,7 +268,7 @@ const FormList: React.FC<FormListProps> = (props) => {
             handleCurPageFormVisible(false);
           }}
         >
-          <CurAdminXForm />
+          <CurXForm />
         </Modal>
       )}
       {formmeta.viewMode === "Drawer" && (
@@ -282,7 +280,7 @@ const FormList: React.FC<FormListProps> = (props) => {
             handleCurPageFormVisible(false);
           }}
         >
-          <CurAdminXForm />
+          <CurXForm />
         </Drawer>
       )}
       </PageContainer>

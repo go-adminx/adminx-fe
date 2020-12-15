@@ -31,7 +31,7 @@ import {
   FileUpload,
 } from '@/extensions/formily/components';
 import 'antd/dist/antd.css';
-import { IAdminXFormField, IAdminXForm } from './data';
+import { FormMetaField, FormMeta } from '@/interface';
 
 const setup = () => {
   registerFormFields({
@@ -65,7 +65,7 @@ const setup = () => {
 }
 setup();
 
-const trans2Prop = (field: IAdminXFormField) => {
+const trans2Prop = (field: FormMetaField) => {
   let defaultComp = field.component;
   if (field.component === 'HSelect' && field.multiple) {
     defaultComp = 'CheckboxGroup';
@@ -201,7 +201,7 @@ const trans2Prop = (field: IAdminXFormField) => {
   return propObj;
 }
 
-const trans2Schema = (viewColumns: number, fields: IAdminXFormField[]) => {
+const trans2Schema = (viewColumns: number, fields: FormMetaField[]) => {
   if (viewColumns < 1) {
     viewColumns = 1;
   }
@@ -291,15 +291,15 @@ const trans2Schema = (viewColumns: number, fields: IAdminXFormField[]) => {
   }
 }
 
-interface AdminXFormProps {
-  formmeta?: Partial<IAdminXForm>;
+interface XFormProps {
+  formmeta?: Partial<FormMeta>;
   formdata?: any;
   onSubmit?: (values: any) => void;
   onCancel?: () => void;
   showLoading?: boolean;
 }
 
-const AdminXForm: React.FC<AdminXFormProps> = (props) => {
+const XForm: React.FC<XFormProps> = (props) => {
   const { formmeta, formdata = {}, onSubmit, onCancel, showLoading } = props;
   const { viewColumns = 2, fields = [] } = formmeta || {};
   const schema = trans2Schema(viewColumns, fields);
@@ -327,4 +327,4 @@ const AdminXForm: React.FC<AdminXFormProps> = (props) => {
   )
 }
 
-export default AdminXForm;
+export default XForm;

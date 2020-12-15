@@ -27,13 +27,13 @@ export default [
     path: '/:module',
     routes: [
       {
-        path: '/:model',
+        path: '/:module/:model',
         component: '@/pages/[module]/[model]/index',
       },
       {
-        path: '/:model/:id',
+        path: '/:module/:model/:id',
         component: '@/pages/[module]/[model]/[id]',
-      }
+      },
     ],
   },
   {

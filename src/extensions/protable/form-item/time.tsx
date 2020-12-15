@@ -2,10 +2,10 @@ import React from "react";
 import moment from 'moment';
 import { TimePicker, Input, Select } from "antd";
 import { parseSearchForm } from "@/utils/utils";
-import { IAdminXFormItemProps } from "./data";
+import { FormMetaItemProps } from "./data";
 const { Option } = Select;
 
-export const TimeFormItem: React.FC<IAdminXFormItemProps> = (props) => {
+export const TimeFormItem: React.FC<FormMetaItemProps> = (props) => {
   const { fieldProps, defaultOperator = '[eq]' } = props;
 
   return (

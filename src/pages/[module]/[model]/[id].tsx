@@ -4,12 +4,12 @@ import { Card } from 'antd';
 import { PageContainer, PageLoading } from '@ant-design/pro-layout';
 import { PageState } from './model';
 import { getSessionUsername } from '@/utils/utils';
-import AdminXForm from '@/components/AdminXForm';
-import { IAdminXForm } from '@/components/AdminXForm/data';
+import XForm from '@/components/XForm';
+import { FormMeta } from '@/interface';
 
 interface FormDetailProps {
   dispatch: Dispatch;
-  formmeta: Partial<IAdminXForm>;
+  formmeta: Partial<FormMeta>;
   detail: any;
   loading: boolean;
   saving: boolean;
@@ -49,7 +49,7 @@ const FormDetail: React.FC<FormDetailProps> = (props) => {
       <PageLoading tip="Loading..." /> :
       <PageContainer>
         <Card>
-          <AdminXForm
+          <XForm
             formmeta={{ ...formmeta, viewMode: 'Page' }}
             formdata={detail}
             onSubmit={(values: { [key: string]: any }) => {

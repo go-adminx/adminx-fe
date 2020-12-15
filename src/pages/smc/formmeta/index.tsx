@@ -6,13 +6,13 @@ import ProTable, { ProColumns, ActionType } from '@ant-design/pro-table';
 import { PageContainer, FooterToolbar } from '@ant-design/pro-layout';
 import { queryFormMeta, deleteFormMeta } from './service';
 import { transProTableReqArgs } from '@/utils/utils';
-import { IAdminXForm } from '@/components/AdminXForm/data';
+import { FormMeta } from '@/interface';
 
 /**
  * 删除
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: IAdminXForm[]) => {
+const handleRemove = async (selectedRows: FormMeta[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
@@ -31,8 +31,8 @@ const handleRemove = async (selectedRows: IAdminXForm[]) => {
 
 const FormMetaList: React.FC<{}> = () => {
   const actionRef = useRef<ActionType>();
-  const [selectedRowsState, setSelectedRows] = useState<IAdminXForm[]>([]);
-  const columns: ProColumns<IAdminXForm>[] = [
+  const [selectedRowsState, setSelectedRows] = useState<FormMeta[]>([]);
+  const columns: ProColumns<FormMeta>[] = [
     {
       title: 'ID',
       dataIndex: 'id',
@@ -91,7 +91,7 @@ const FormMetaList: React.FC<{}> = () => {
 
   return (
     <PageContainer>
-      <ProTable<IAdminXForm>
+      <ProTable<FormMeta>
         headerTitle="FormMeta List"
         rowKey="id"
         search={{

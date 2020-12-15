@@ -8,12 +8,12 @@ import MonacoEditor from 'react-monaco-editor';
 import { PageState } from './model';
 import CodeEditor from '@/extensions/form-render/components/code-editor';
 import { getSessionUsername } from '@/utils/utils';
-import { IAdminXForm } from '@/components/AdminXForm/data';
-import AdminXForm from '@/components/AdminXForm';
+import { FormMeta } from '@/interface';
+import XForm from '@/components/XForm';
 
 interface FormDetailProps {
   dispatch: Dispatch;
-  detail?: Partial<IAdminXForm>;
+  detail?: Partial<FormMeta>;
   loading: boolean;
 }
 
@@ -119,7 +119,7 @@ const EntityFormForm: React.FC<FormDetailProps> = (props) => {
       }}
       visible={previewDrawerVisible}
     >
-      <AdminXForm formmeta={values} />
+      <XForm formmeta={values} />
     </Drawer>
     <Modal
       title="编辑数据"

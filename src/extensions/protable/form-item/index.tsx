@@ -1,4 +1,4 @@
-import { IAdminXFormField } from "@/components/AdminXForm/data";
+import { FormMetaField } from "@/interface";
 import React from "react";
 import { DateFormItem } from "./date";
 import { NumberFormItem } from "./number";
@@ -6,8 +6,8 @@ import { SelectFormItem } from "./select";
 import { TextFormItem } from "./text";
 import { TimeFormItem } from "./time";
 
-function renderAdminXFormItem(props: {
-  field: IAdminXFormField;
+function renderXFormItem(props: {
+  field: FormMetaField;
   value?: any;
   onChange?: (val: any) => void;
 }): React.ReactNode {
@@ -33,7 +33,6 @@ function renderAdminXFormItem(props: {
         <NumberFormItem {...props} defaultOperator={'[eq]'} fieldProps={fieldProps} />
       );
     case 'FloatPicker':
-      fieldProps['precision'] = field.precision || 1;
       return (
         <NumberFormItem {...props} defaultOperator={'[like]'} fieldProps={fieldProps} />
       );
@@ -49,7 +48,7 @@ function renderAdminXFormItem(props: {
     case 'VSelect':
     case 'HSelect':
       try {
-        fieldProps['options'] = JSON.parse(field.enum);
+        fieldProps['options'] = field.enum ? JSON.parse(field.enum) : [];
       } catch {
         fieldProps['options'] = [];
       };
@@ -96,4 +95,4 @@ function renderAdminXFormItem(props: {
   }
 };
 
-export default renderAdminXFormItem;
+export default renderXFormItem;

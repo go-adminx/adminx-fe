@@ -1,9 +1,9 @@
-import { IAdminXForm } from '@/components/AdminXForm/data';
+import { FormMeta } from '@/interface';
 import { Effect, Reducer } from 'umi';
 import { createFormMeta, deleteFormMeta, getFormMeta, updateFormMeta } from './service';
 
 export interface PageState {
-  detail?: Partial<IAdminXForm>;
+  detail?: Partial<FormMeta>;
 }
 
 export interface ModelType {

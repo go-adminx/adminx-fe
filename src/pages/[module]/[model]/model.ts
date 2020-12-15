@@ -1,9 +1,9 @@
-import { IAdminXForm } from '@/components/AdminXForm/data';
+import { FormMeta } from '@/interface';
 import { Effect, Reducer } from 'umi';
 import { getMeta, getForm, createForm, updateForm, deleteForm } from './service';
 
 export interface PageState {
-  formmeta: Partial<IAdminXForm>;
+  formmeta: Partial<FormMeta>;
   detail: { [key: string]: any };
 }
 
@@ -34,32 +34,32 @@ const Model: ModelType = {
 
   effects: {
     *getMeta({ payload }, { call, put }) {
-      const { modelname } = payload;
-      const response = yield call(getMeta, modelname);
+      const { model } = payload;
+      const response = yield call(getMeta, model);
       yield put({
         type: 'setMeta',
         payload: response,
       });
     },
     *getForm({ payload }, { call, put }) {
-      const { modelname, id } = payload;
-      const response = yield call(getForm, modelname, id);
+      const { model, id } = payload;
+      const response = yield call(getForm, model, id);
       yield put({
         type: 'setFormDetail',
         payload: response,
       });
     },
     *createForm({ payload }, { call }) {
-      const { modelname, values } = payload;
-      yield call(createForm, modelname, values);
+      const { model, values } = payload;
+      yield call(createForm, model, values);
     },
     *updateForm({ payload }, { call }) {
-      const { modelname, id, values } = payload;
-      yield call(updateForm,modelname, id, values);
+      const { model, id, values } = payload;
+      yield call(updateForm,model, id, values);
     },
     *deleteForm({ payload }, { call }) {
-      const { modelname, ids } = payload;
-      yield call(deleteForm, modelname, ids);
+      const { model, ids } = payload;
+      yield call(deleteForm, model, ids);
     }
   },
 
