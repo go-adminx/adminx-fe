@@ -78,11 +78,6 @@
                         "type": "number",
                         "ui:hidden": true
                     },
-                    "type": {
-                        "title": "字段类型",
-                        "type": "string",
-                        "ui:hidden": true
-                    },
                     "pid": {
                         "title": "PID",
                         "type": "number",
@@ -90,6 +85,21 @@
                     },
                     "pfd": {
                         "title": "PFD",
+                        "type": "string",
+                        "ui:hidden": true
+                    },
+                    "idx": {
+                        "title": "排序",
+                        "type": "number",
+                        "ui:hidden": true
+                    },
+                    "key": {
+                        "title": "Key",
+                        "type": "string",
+                        "ui:hidden": true
+                    },
+                    "type": {
+                        "title": "字段类型",
                         "type": "string",
                         "ui:hidden": true
                     },
@@ -346,6 +356,21 @@
                                 },
                                 "pfd": {
                                     "title": "PFD",
+                                    "type": "string",
+                                    "ui:hidden": true
+                                },
+                                "idx": {
+                                    "title": "排序",
+                                    "type": "number",
+                                    "ui:hidden": true
+                                },
+                                "key": {
+                                    "title": "Key",
+                                    "type": "string",
+                                    "ui:hidden": true
+                                },
+                                "type": {
+                                    "title": "字段类型",
                                     "type": "string",
                                     "ui:hidden": true
                                 },
