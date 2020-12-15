@@ -24,6 +24,14 @@ export default [
     component: '@/pages/index',
   },
   {
+    path: '/smc/formmeta',
+    component: '@/pages/smc/formmeta/index',
+  },
+  {
+    path: '/smc/formmeta/:id',
+    component: '@/pages/smc/formmeta/[id]',
+  },
+  {
     path: '/:module',
     routes: [
       {

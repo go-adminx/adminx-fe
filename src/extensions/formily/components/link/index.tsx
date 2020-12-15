@@ -15,7 +15,7 @@ export const Link: React.FC<ISchemaFieldComponentProps> = props => {
 
   const onSearch = (val: string) => {
     if (val) {
-      request('/api/common/linksearch', {
+      request('/api/client/linksearch', {
         method: 'get',
         headers: {
           'Authorization': localStorage.getItem('X-AdminX-Token') || '',
@@ -55,7 +55,7 @@ export const Link: React.FC<ISchemaFieldComponentProps> = props => {
           return v[optKey];
         }).join(",");
       }
-      request('/api/common/linkget', {
+      request('/api/client/linkget', {
         method: 'get',
         headers: {
           'Authorization': localStorage.getItem('X-AdminX-Token') || '',

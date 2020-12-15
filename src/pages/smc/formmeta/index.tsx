@@ -39,26 +39,24 @@ const FormMetaList: React.FC<{}> = () => {
       sorter: true,
     },
     {
-      title: '所属模块',
-      dataIndex: 'moduleName',
+      title: '标题',
+      dataIndex: 'title',
     },
     {
-      title: 'Go结构体名称',
-      dataIndex: 'structName',
-    },
-    {
-      title: '菜单显示',
-      dataIndex: 'inMenu',
-      renderText: (val: boolean) => val ? '是' : '否',
+      title: 'Model',
+      dataIndex: 'modelName',
     },
     {
       title: '表单状态',
       dataIndex: 'status'
     },
     {
-      title: '描述',
-      dataIndex: 'remark',
-      valueType: 'textarea',
+      title: '表单视图',
+      dataIndex: 'viewMode',
+    },
+    {
+      title: '视图列数',
+      dataIndex: 'viewColumns',
     },
     {
       title: '更新于',

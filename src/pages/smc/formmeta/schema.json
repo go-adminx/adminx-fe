@@ -293,6 +293,13 @@
                         "ui:options": {},
                         "ui:hidden": "{{rootValue.component!='ArrayTable' && rootValue.component!='ArrayCards'}}"
                     },
+                    "linkModule": {
+                        "title": "关联Module",
+                        "type": "string",
+                        "ui:width": "20%",
+                        "ui:options": {},
+                        "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                    },
                     "linkModel": {
                         "title": "关联Model",
                         "type": "string",
@@ -537,26 +544,33 @@
                                     "ui:options": {},
                                     "ui:widget": "codeEditor"
                                 },
+                                "linkModule": {
+                                    "title": "关联Module",
+                                    "type": "string",
+                                    "ui:width": "20%",
+                                    "ui:options": {},
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink'}}"
+                                },
                                 "linkModel": {
                                     "title": "关联Model",
                                     "type": "string",
                                     "ui:width": "20%",
                                     "ui:options": {},
-                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink'}}"
                                 },
                                 "linkLabelField": {
                                     "title": "关联标签字段",
                                     "type": "string",
                                     "ui:width": "20%",
                                     "ui:options": {},
-                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink'}}"
                                 },
                                 "linkValueField": {
                                     "title": "关联值字段",
                                     "type": "string",
                                     "ui:width": "20%",
                                     "ui:options": {},
-                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink' && rootValue.component!='AssociatedLink'}}"
+                                    "ui:hidden": "{{rootValue.component!='UnassociatedLink'}}"
                                 }
                             },
                             "required": ["label", "component"]

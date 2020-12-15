@@ -78,11 +78,8 @@ export const canDo = (
 ) : boolean => {
   const { initialState } = useModel('@@initialState');
   const { currentUser = {}, acRules = [] } = initialState || {};
-  if (currentUser.username === "admin") {
-    return true;
-  }
   const currentUserPerms = currentUser && currentUser.roles ? currentUser.roles.map(role => {
-    return `${role.name},/api/crud/${model}/${act}`;
+    return `${role.ident},/api/crud/${model}/${act}`;
   }) : [];
   // console.log(
   //   currentUser,

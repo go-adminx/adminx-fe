@@ -143,6 +143,7 @@ const trans2Prop = (field: FormMetaField) => {
     editable: field.status === 'Edit',
     readOnly: field.status === 'Disabled',
     visible: field.status !== 'Hidden',
+    display: !['id', 'createdBy', 'updatedBy', 'createdAt', 'updatedAt', 'deletedAt', 'pid'].includes(field.key),
     'x-component': defaultComp,
     'x-mega-props': {
       span: field.span,

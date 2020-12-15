@@ -30,7 +30,7 @@ export interface CurrentUser {
   deptId?: number;
   access?: 'user' | 'guest' | 'admin';
   unreadCount?: number;
-  roles?: RoleItem[];
+  roles?: Role[];
 }
 
 export interface NoticeIconData {
@@ -63,7 +63,8 @@ export interface MenuItem {
   [key: string]: any;
 }
 
-export interface RoleItem {
+export interface Role {
+  ident: string;
   name: string;
   remark?: string;
 }
@@ -119,6 +120,7 @@ export interface FormMetaField {
   rules?: string;
   linkages?: string;
   uniqueItems: boolean;
+  linkModule?: string;
   linkModel?: string;
   linkLabelField?: string;
   linkValueField?: string;
